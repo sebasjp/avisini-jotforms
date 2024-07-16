@@ -1,0 +1,7 @@
+requests
+pytz
+jaro_winkler
+html2text
+unidecode
+jupyterlab==4.2.1
+ipywidgets==8.1.2

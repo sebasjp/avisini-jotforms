@@ -1,0 +1,17 @@
+version: "3.3"
+
+services:
+
+# contenedor para desarrollo
+
+  dev_server:
+    build:
+      context: ./dev
+      dockerfile: ./Dockerfile
+    container_name: dev_container
+    volumes:
+      - ../data:/workdir/data
+      - ../src:/workdir/src
+      - /tmp/.X11-unix:/tmp/.X11-unix # para generar ventana de graficos (matplotlib, opencv, etc.)
+    ports:
+      - 8889:8888
