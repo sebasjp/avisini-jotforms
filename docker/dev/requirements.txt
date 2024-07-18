@@ -1,7 +1,7 @@
-requests
-pytz
-jaro_winkler
-html2text
-unidecode
+requests==2.32.3
+pytz==2024.1
+jaro_winkler==2.0.3
+html2text==2024.2.26
+unidecode==1.3.8
 jupyterlab==4.2.1
 ipywidgets==8.1.2

@@ -5,12 +5,6 @@ from pytz import timezone
 
 
 def saveJson(data: list, path_write: str):
-
-  if "/raw/" in path_write:
-    validateFolder = "./output/raw"
-    
-  if not os.path.exists(validateFolder):
-    os.makedirs(validateFolder)
     
   bogota_tz = timezone('America/Bogota')
   now_bogota = datetime.now(bogota_tz)
