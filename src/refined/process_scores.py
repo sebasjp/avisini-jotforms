@@ -5,7 +5,8 @@ from src.refined.helper_process_scores import getCleanAnswer
 
 def scoreInstruments(participants: dict, overwrite: bool=False):
 
-    for participant in participants.values():
+    for doc_number, participant in participants.items():
+        print("Processing scoreInstruments - doc_number:", doc_number)
         submissionsByForm = participant['submissionsByForm']
         for submissions in submissionsByForm.values():
             for submission in submissions:

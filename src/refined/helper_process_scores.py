@@ -28,45 +28,56 @@ def scoreDEMOGRAF(payload: dict):
     answers = payload['writableInstrumentData']['answers']
     applicationDate = payload['applicationDate']
 
-    birthYear = str(answers['birthDate_3']['answer'])
-    birthMonth = str(answers['birthDate_2']['answer'])
-    birthDay = str(answers['birthDate_1']['answer'])
+    if answers=={}:
+        # si no hay respuestas
+        print("WARNING: scoreDEMOGRAF is empty")
+        result = {
+            'ageInYears': None,
+            'ageOrdinal': None,
+            'ageCategorical': None,
+        }
+    else:
+        birthYear = str(answers['birthDate_3']['answer'])
+        birthMonth = str(answers['birthDate_2']['answer'])
+        birthDay = str(answers['birthDate_1']['answer'])
 
-    birthMoment = datetime.strptime(f"{birthYear}-{birthMonth}-{birthDay}", "%Y-%m-%d")
-    ageInYears = relativedelta(applicationDate, birthMoment).years
+        birthMoment = datetime.strptime(f"{birthYear}-{birthMonth}-{birthDay}", "%Y-%m-%d")
+        ageInYears = relativedelta(applicationDate, birthMoment).years
 
-    if ageInYears < 0:
-        raise ValueError(f"scoreDEMOGRAF: Negative age: {ageInYears}")
+        if ageInYears < 0:
+            raise ValueError(f"scoreDEMOGRAF: Negative age: {ageInYears}")
 
-    ageCategories = {
-        1: 'Primera Infancia',
-        2: 'Infancia',
-        3: 'Adolescencia',
-        4: 'Juventud',
-        5: 'Adultez',
-        6: 'Persona Mayor',
-    }
+        ageCategories = {
+            1: 'Primera Infancia',
+            2: 'Infancia',
+            3: 'Adolescencia',
+            4: 'Juventud',
+            5: 'Adultez',
+            6: 'Persona Mayor',
+        }
 
-    ageOrdinal = 0
+        ageOrdinal = 0
 
-    if 0 <= ageInYears <= 5:
-        ageOrdinal = 1
-    elif 6 <= ageInYears <= 11:
-        ageOrdinal = 2
-    elif 12 <= ageInYears <= 18:
-        ageOrdinal = 3
-    elif 19 <= ageInYears <= 26:
-        ageOrdinal = 4
-    elif 27 <= ageInYears <= 59:
-        ageOrdinal = 5
-    elif ageInYears >= 60:
-        ageOrdinal = 6
+        if 0 <= ageInYears <= 5:
+            ageOrdinal = 1
+        elif 6 <= ageInYears <= 11:
+            ageOrdinal = 2
+        elif 12 <= ageInYears <= 18:
+            ageOrdinal = 3
+        elif 19 <= ageInYears <= 26:
+            ageOrdinal = 4
+        elif 27 <= ageInYears <= 59:
+            ageOrdinal = 5
+        elif ageInYears >= 60:
+            ageOrdinal = 6
 
-    return {
-        'ageInYears': ageInYears,
-        'ageOrdinal': ageOrdinal,
-        'ageCategorical': ageCategories[ageOrdinal],
-    }
+        result = {
+            'ageInYears': ageInYears,
+            'ageOrdinal': ageOrdinal,
+            'ageCategorical': ageCategories[ageOrdinal],
+        }
+
+    return result
 
 
 def scoreWhooley(payload: dict):

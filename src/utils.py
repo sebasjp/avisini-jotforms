@@ -10,8 +10,11 @@ def saveJson(data: list, path_write: str):
   now_bogota = datetime.now(bogota_tz)
   now_str = now_bogota.strftime('%Y%m%d') # Format the datetime object
 
-  with open(path_write.format(now_str=now_str), 'w') as f:
+  path = path_write.format(now_str=now_str)
+  with open(path, 'w') as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
+
+  print(f"Save file: {path}")
 
 
 def readJson(path_read: str):
@@ -20,7 +23,10 @@ def readJson(path_read: str):
   now_bogota = datetime.now(bogota_tz)
   now_str = now_bogota.strftime('%Y%m%d') # Format the datetime object
 
-  with open(path_read.format(now_str=now_str), 'r') as f:
+  path = path_read.format(now_str=now_str)
+  with open(path, 'r') as f:
     data = json.load(f)
+
+  print(f"Read file: {path}")
 
   return data

@@ -87,6 +87,10 @@ def matchParticipant(participants: dict, participantSubmission: dict):
         resultParticipant = newParticipant.copy()
     else:
         resultParticipant = participant.copy()
+        print(
+            "Participant already exists:", 
+            {var: val for var, val in resultParticipant.items() if var in ["uuid","firstNameA", "lastNameA", "documentNumber"]}
+        )  # Debugging statement
         
     return resultParticipant
 

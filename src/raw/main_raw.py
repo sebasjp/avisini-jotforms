@@ -11,7 +11,7 @@ payload = {
 submissions = fetchSubmissions(payload)
 print(len(submissions))
 
-submissions = submissions[:2]
+submissions = submissions[:50]
 print(len(submissions))
 
 # save list of json

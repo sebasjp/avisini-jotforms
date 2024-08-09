@@ -112,11 +112,11 @@ def measureSimilarity(participant, submission):
 
 def assignParticipantSubmission(participant, participantSubmission):
     
-    participant.submissionsByForm[participantSubmission.formId].append(participantSubmission)
+    participant["submissionsByForm"][participantSubmission["formId"]].append(participantSubmission)
 
-    if len(participant.submissionsByForm[participantSubmission.formId]) > 1:
-        participant.submissionsByForm[participantSubmission.formId].sort(
-            key=lambda s: s.jotformSubmission.created_at
+    if len(participant["submissionsByForm"][participantSubmission["formId"]]) > 1:
+        participant["submissionsByForm"][participantSubmission["formId"]].sort(
+            key=lambda s: s["jotformSubmission"]["created_at"]
         )
 
     return participant
